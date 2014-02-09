@@ -93,9 +93,13 @@ public class ZipUtil {
 
 		DOMSource source = new DOMSource(document);
 		File tempFile = File.createTempFile(arg0, arg1);
+		tempFile.deleteOnExit();
 		FileOutputStream os = new FileOutputStream(tempFile);
 		StreamResult result = new StreamResult(os);
 		transformer.transform(source, result);
+		if (os != null) {
+			os.close();
+		}
 
 		return tempFile;
 

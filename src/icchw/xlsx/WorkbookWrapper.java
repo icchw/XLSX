@@ -54,6 +54,7 @@ public class WorkbookWrapper {
 		this.templateWb = wb;
 
 		File templateFile = File.createTempFile("template", "xlsx");
+		templateFile.deleteOnExit();
 		templateWb.write(new FileOutputStream(templateFile));
 		this.templateZip = new ZipFile(templateFile);
 	}
